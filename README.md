@@ -1,5 +1,9 @@
 # slint-todo-widget-example
 
+A small slint example on how to implement widgets. 
+AI created this entirely, the only goal for this is to be used as a guideline for 
+implementing your own widgets
+
 The Slint todo example with an Android home screen widget, written almost entirely in Rust.
 
 The widget UI (`ui/widget.slint`) is rendered offscreen with Slint's software renderer, pushed into the

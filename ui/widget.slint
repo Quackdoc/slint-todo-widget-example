@@ -1,0 +1,61 @@
+import { TodoItem } from "types.slint";
+
+// Rendered offscreen into the home screen widget bitmap.
+export component TodoWidget inherits Window {
+    in property <[TodoItem]> items;
+    in property <int> max-items: 5;
+
+    background: transparent;
+    default-font-size: 14px;
+
+    in property <int> done-count;
+
+    Rectangle {
+        background: #1d2230;
+        border-radius: 22px;
+
+        VerticalLayout {
+            padding: 16px;
+            spacing: 10px;
+
+            HorizontalLayout {
+                height: 28px;
+                Text {
+                    text: "Todo";
+                    color: white;
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+                Text {
+                    text: "\{done-count}/\{items.length}";
+                    color: #8d97b5;
+                    font-size: 14px;
+                    horizontal-alignment: right;
+                    vertical-alignment: center;
+                }
+            }
+
+            for item[i] in items: HorizontalLayout {
+                visible: i < max-items;
+                height: i < max-items ? 26px : 0px;
+                spacing: 10px;
+                Rectangle {
+                    width: 18px;
+                    height: 18px;
+                    y: (parent.height - self.height) / 2;
+                    border-radius: 9px;
+                    border-width: 2px;
+                    border-color: item.checked ? #5b8def : #5d6788;
+                    background: item.checked ? #5b8def : transparent;
+                }
+                Text {
+                    text: item.title;
+                    color: item.checked ? #6b7596 : #e8ecf8;
+                    overflow: elide;
+                    vertical-alignment: center;
+                }
+            }
+            Rectangle { }
+        }
+    }
+}

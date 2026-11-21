@@ -1,0 +1,34 @@
+[package]
+name = "todo-widget"
+version = "0.1.0"
+edition = "2024"
+build = "build.rs"
+publish = false
+
+[lib]
+crate-type = ["lib", "cdylib"]
+path = "src/lib.rs"
+name = "todo_widget_lib"
+
+[[bin]]
+path = "src/main.rs"
+name = "todo-widget"
+
+[dependencies]
+slint = { git = "https://github.com/slint-ui/slint", rev = "7148ace57a7595ba3479f0f0d971c4ca1959e2a4", default-features = false, features = ["compat-1-18", "std", "serde", "backend-android-activity-06", "renderer-software"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[build-dependencies]
+slint-build = { git = "https://github.com/slint-ui/slint", rev = "7148ace57a7595ba3479f0f0d971c4ca1959e2a4" }
+
+[features]
+default = ["slint/default"]
+
+[workspace]
+
+[target.'cfg(target_os = "android")'.dependencies]
+jni = "0.21"
+ndk-context = "0.1"
+log = "0.4"
+android_logger = "0.15"
